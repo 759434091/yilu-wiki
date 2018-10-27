@@ -24,8 +24,14 @@ public class WIKIController {
     @GetMapping("/pages")
     public List<YwPage> getPages(@RequestParam(required = false) String ypName,
                                  @RequestParam(required = false) String ypType,
-                                 @RequestParam(required = false) String ypAbstract) {
-        return wikiService.getPages(ypName, ypType, ypAbstract);
+                                 @RequestParam(required = false) String ypAbstract,
+                                 @RequestParam Integer page,
+                                 @RequestParam Integer pageSize) throws InvalidParameterException {
+        if (page < 1)
+            throw new InvalidParameterException("page must bigger than 0");
+        if (pageSize < 1 || pageSize > 500)
+            throw new InvalidParameterException("pageSize must between 1 and 500");
+        return wikiService.getPages(ypName, ypType, ypAbstract, page, pageSize);
     }
 
 }

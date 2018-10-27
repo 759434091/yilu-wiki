@@ -33,7 +33,6 @@ public class WIKIService {
         if (null != ypAbstract)
             criteria.andYpAbstractLike("%" + ypAbstract + "%");
         PageHelper.startPage(page, pageSize);
-        // TODO
         return ywPageMapper.selectByExample(ywPageExample);
     }
 
