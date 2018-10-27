@@ -8,19 +8,18 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.ServletRequestBindingException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import team.a9043.yiluwiki.exception.InvalidParameterException;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@ControllerAdvice
-@RestController
+@RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
     private static final String errResStr =

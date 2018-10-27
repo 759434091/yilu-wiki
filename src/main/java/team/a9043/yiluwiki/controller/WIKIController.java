@@ -1,12 +1,16 @@
 package team.a9043.yiluwiki.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import team.a9043.yiluwiki.controller.valid_group.InsertYwPage;
+import team.a9043.yiluwiki.controller.valid_group.ModifyYwPage;
 import team.a9043.yiluwiki.entity.YwPage;
+import team.a9043.yiluwiki.exception.InvalidParameterException;
 import team.a9043.yiluwiki.service.ResourceNotFoundException;
 import team.a9043.yiluwiki.service.WIKIService;
+import team.a9043.yiluwiki.service_pojo.OperationResponse;
+import team.a9043.yiluwiki.service_pojo.VoidOperationResponse;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -34,4 +38,25 @@ public class WIKIController {
         return wikiService.getPages(ypName, ypType, ypAbstract, page, pageSize);
     }
 
+    @PostMapping("/pages")
+    public OperationResponse<YwPage> insertPage(@RequestBody @Validated(InsertYwPage.class) YwPage ywPage,
+                                                BindingResult bindingResult) throws InvalidParameterException {
+        if (bindingResult.hasErrors())
+            throw new InvalidParameterException(bindingResult.toString());
+        return wikiService.insertPage(ywPage);
+    }
+
+    @PutMapping("/pages/{ypId}")
+    public OperationResponse<YwPage> modifyPage(@PathVariable Integer ypId,
+                                                @RequestBody @Validated(ModifyYwPage.class) YwPage ywPage,
+                                                BindingResult bindingResult) throws InvalidParameterException {
+        if (bindingResult.hasErrors())
+            throw new InvalidParameterException(bindingResult.toString());
+        return wikiService.modifyPage(ypId, ywPage);
+    }
+
+    @DeleteMapping("/pages/{ypId}")
+    public VoidOperationResponse deletePage(@PathVariable Integer ypId) {
+        return wikiService.deletePage(ypId);
+    }
 }

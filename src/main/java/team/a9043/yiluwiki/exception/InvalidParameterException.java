@@ -1,4 +1,4 @@
-package team.a9043.yiluwiki.controller;
+package team.a9043.yiluwiki.exception;
 
 public class InvalidParameterException extends Exception {
     public InvalidParameterException() {
