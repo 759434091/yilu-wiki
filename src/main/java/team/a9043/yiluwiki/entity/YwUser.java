@@ -1,22 +1,35 @@
 package team.a9043.yiluwiki.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "用户实体")
 public class YwUser {
+    @ApiModelProperty("wiki用户ID")
     private Integer yuId;
 
+    @ApiModelProperty("github登录名")
     private String yuLogin;
 
+    @ApiModelProperty("github.NodeId")
     private String yuNodeId;
 
+    @ApiModelProperty("github头像")
     private String yuAvatarUrl;
 
+    @ApiModelProperty("github主页")
     private String yuHtmlUrl;
 
+    @ApiModelProperty("github昵称")
     private String yuName;
 
+    @ApiModelProperty("github介绍")
     private String yuBio;
 
+    @ApiModelProperty("系统密码, 暂无用处")
     private String yuPassword;
 
+    @ApiModelProperty("github用户ID")
     private Integer yuGithubId;
 
     public Integer getYuId() {

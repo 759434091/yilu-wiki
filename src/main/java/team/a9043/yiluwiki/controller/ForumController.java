@@ -3,6 +3,7 @@ package team.a9043.yiluwiki.controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 import team.a9043.yiluwiki.controller.valid_group.InsertYwForumPost;
 import team.a9043.yiluwiki.controller.valid_group.InsertYwForumReply;
 import team.a9043.yiluwiki.controller.valid_group.ModifyYwForumPost;
@@ -40,7 +41,7 @@ public class ForumController {
     }
 
     @PostMapping("/posts")
-    public YwForumPost insertPost(@TokenUser YwUser ywUser,
+    public YwForumPost insertPost(@TokenUser @ApiIgnore YwUser ywUser,
                                   @RequestBody @Validated(InsertYwForumPost.class) YwForumPost ywForumPost,
                                   BindingResult bindingResult) throws InvalidParameterException {
         if (bindingResult.hasErrors())
@@ -49,12 +50,12 @@ public class ForumController {
     }
 
     @DeleteMapping("/posts/{yfpId}")
-    public VoidOperationResponse deletePost(@TokenUser YwUser ywUser, @PathVariable Integer yfpId) throws InvalidParameterException, InvalidPermissionException {
+    public VoidOperationResponse deletePost(@TokenUser @ApiIgnore YwUser ywUser, @PathVariable Integer yfpId) throws InvalidParameterException, InvalidPermissionException {
         return forumService.deletePost(ywUser, yfpId);
     }
 
     @PutMapping("/posts/{yfpId}")
-    public YwForumPost modifyPost(@TokenUser YwUser ywUser,
+    public YwForumPost modifyPost(@TokenUser @ApiIgnore YwUser ywUser,
                                   @PathVariable Integer yfpId,
                                   @RequestBody @Validated(ModifyYwForumPost.class) YwForumPost ywForumPost,
                                   BindingResult bindingResult) throws InvalidParameterException, InvalidPermissionException {
@@ -75,7 +76,7 @@ public class ForumController {
     }
 
     @PostMapping("/posts/{yfpId}/replies")
-    public YwForumReply insertReply(@TokenUser YwUser ywUser,
+    public YwForumReply insertReply(@TokenUser @ApiIgnore YwUser ywUser,
                                     @PathVariable Integer yfpId,
                                     @RequestBody @Validated(InsertYwForumReply.class) YwForumReply ywForumReply,
                                     BindingResult bindingResult) throws InvalidParameterException {
@@ -85,14 +86,14 @@ public class ForumController {
     }
 
     @DeleteMapping("/posts/{yfpId}/replies/{yfrId}")
-    public VoidOperationResponse deleteReply(@TokenUser YwUser ywUser,
+    public VoidOperationResponse deleteReply(@TokenUser @ApiIgnore YwUser ywUser,
                                              @PathVariable Integer yfpId,
                                              @PathVariable Integer yfrId) throws InvalidParameterException, InvalidPermissionException {
         return forumService.deleteReply(ywUser, yfpId, yfrId);
     }
 
     @PutMapping("/posts/{yfpId}/replies/{yfrId}")
-    public YwForumReply modifyReply(@TokenUser YwUser ywUser,
+    public YwForumReply modifyReply(@TokenUser @ApiIgnore YwUser ywUser,
                                     @PathVariable Integer yfpId,
                                     @PathVariable Integer yfrId,
                                     @RequestBody @Validated(ModifyYwForumReply.class) YwForumReply ywForumReply,

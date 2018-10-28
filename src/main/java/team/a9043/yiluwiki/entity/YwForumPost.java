@@ -1,24 +1,33 @@
 package team.a9043.yiluwiki.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 import team.a9043.yiluwiki.controller.valid_group.InsertYwForumPost;
 import team.a9043.yiluwiki.controller.valid_group.ModifyYwForumPost;
 
 import java.time.LocalDateTime;
 
+@ApiModel(description = "帖子实体")
 public class YwForumPost {
+    @ApiModelProperty("插入修改时为空")
     private Integer yfpId;
 
     @Length(min = 5, max = 60, groups = {InsertYwForumPost.class, ModifyYwForumPost.class})
+    @ApiModelProperty("notnull & length[5, 60]")
     private String yfpTitle;
 
+    @ApiModelProperty("插入修改时为空")
     private LocalDateTime yfpCreateTime;
 
+    @ApiModelProperty("插入修改时为空")
     private LocalDateTime yfpUpdateTime;
 
+    @ApiModelProperty("插入修改时为空")
     private Integer yuId;
 
     @Length(min = 10, max = 65535, groups = {InsertYwForumPost.class, ModifyYwForumPost.class})
+    @ApiModelProperty("notnull & length[10, 65535]")
     private String yfpContent;
 
     public Integer getYfpId() {

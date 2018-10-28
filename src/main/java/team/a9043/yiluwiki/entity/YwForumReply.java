@@ -1,25 +1,35 @@
 package team.a9043.yiluwiki.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 import team.a9043.yiluwiki.controller.valid_group.InsertYwForumReply;
 import team.a9043.yiluwiki.controller.valid_group.ModifyYwForumReply;
 
 import java.time.LocalDateTime;
 
+@ApiModel(description = "帖子回复实体")
 public class YwForumReply {
+    @ApiModelProperty("插入修改时为空")
     private Integer yfrId;
 
     @Length(min = 5, max = 1000, groups = {InsertYwForumReply.class, ModifyYwForumReply.class})
+    @ApiModelProperty("notnull & length[5, 1000]")
     private String yfrContent;
 
+    @ApiModelProperty("插入为空时不回复某一楼层,不为空时回复某一楼层; 修改时为空")
     private Integer yfrReplyTo;
 
+    @ApiModelProperty("插入修改时为空")
     private Integer yfpId;
 
+    @ApiModelProperty("插入修改时为空")
     private Integer yuId;
 
+    @ApiModelProperty("插入修改时为空")
     private LocalDateTime yfrCreateTime;
 
+    @ApiModelProperty("插入修改时为空")
     private LocalDateTime yfrUpdateTime;
 
     public Integer getYfrId() {
