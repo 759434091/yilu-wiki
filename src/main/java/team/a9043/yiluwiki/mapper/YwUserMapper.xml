@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.a9043.yiluwiki.mapper.YwUserMapper">
+  <resultMap id="BaseResultMap" type="team.a9043.yiluwiki.entity.YwUser">
+    <id column="yu_id" jdbcType="INTEGER" property="yuId" />
+    <result column="yu_login" jdbcType="VARCHAR" property="yuLogin" />
+    <result column="yu_node_id" jdbcType="VARCHAR" property="yuNodeId" />
+    <result column="yu_avatar_url" jdbcType="VARCHAR" property="yuAvatarUrl" />
+    <result column="yu_html_url" jdbcType="VARCHAR" property="yuHtmlUrl" />
+    <result column="yu_name" jdbcType="VARCHAR" property="yuName" />
+    <result column="yu_bio" jdbcType="VARCHAR" property="yuBio" />
+    <result column="yu_password" jdbcType="VARCHAR" property="yuPassword" />
+    <result column="yu_github_id" jdbcType="INTEGER" property="yuGithubId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    yu_id, yu_login, yu_node_id, yu_avatar_url, yu_html_url, yu_name, yu_bio, yu_password, 
+    yu_github_id
+  </sql>
+  <select id="selectByExample" parameterType="team.a9043.yiluwiki.entity.YwUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from yw_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yw_user
+    where yu_id = #{yuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from yw_user
+    where yu_id = #{yuId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="team.a9043.yiluwiki.entity.YwUserExample">
+    delete from yw_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="team.a9043.yiluwiki.entity.YwUser">
+    <selectKey keyProperty="yuId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yw_user (yu_login, yu_node_id, yu_avatar_url, 
+      yu_html_url, yu_name, yu_bio, 
+      yu_password, yu_github_id)
+    values (#{yuLogin,jdbcType=VARCHAR}, #{yuNodeId,jdbcType=VARCHAR}, #{yuAvatarUrl,jdbcType=VARCHAR}, 
+      #{yuHtmlUrl,jdbcType=VARCHAR}, #{yuName,jdbcType=VARCHAR}, #{yuBio,jdbcType=VARCHAR}, 
+      #{yuPassword,jdbcType=VARCHAR}, #{yuGithubId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="team.a9043.yiluwiki.entity.YwUser">
+    <selectKey keyProperty="yuId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yw_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="yuLogin != null">
+        yu_login,
+      </if>
+      <if test="yuNodeId != null">
+        yu_node_id,
+      </if>
+      <if test="yuAvatarUrl != null">
+        yu_avatar_url,
+      </if>
+      <if test="yuHtmlUrl != null">
+        yu_html_url,
+      </if>
+      <if test="yuName != null">
+        yu_name,
+      </if>
+      <if test="yuBio != null">
+        yu_bio,
+      </if>
+      <if test="yuPassword != null">
+        yu_password,
+      </if>
+      <if test="yuGithubId != null">
+        yu_github_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="yuLogin != null">
+        #{yuLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="yuNodeId != null">
+        #{yuNodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="yuAvatarUrl != null">
+        #{yuAvatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="yuHtmlUrl != null">
+        #{yuHtmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="yuName != null">
+        #{yuName,jdbcType=VARCHAR},
+      </if>
+      <if test="yuBio != null">
+        #{yuBio,jdbcType=VARCHAR},
+      </if>
+      <if test="yuPassword != null">
+        #{yuPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="yuGithubId != null">
+        #{yuGithubId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="team.a9043.yiluwiki.entity.YwUserExample" resultType="java.lang.Long">
+    select count(*) from yw_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update yw_user
+    <set>
+      <if test="record.yuId != null">
+        yu_id = #{record.yuId,jdbcType=INTEGER},
+      </if>
+      <if test="record.yuLogin != null">
+        yu_login = #{record.yuLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yuNodeId != null">
+        yu_node_id = #{record.yuNodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yuAvatarUrl != null">
+        yu_avatar_url = #{record.yuAvatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yuHtmlUrl != null">
+        yu_html_url = #{record.yuHtmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yuName != null">
+        yu_name = #{record.yuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yuBio != null">
+        yu_bio = #{record.yuBio,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yuPassword != null">
+        yu_password = #{record.yuPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yuGithubId != null">
+        yu_github_id = #{record.yuGithubId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update yw_user
+    set yu_id = #{record.yuId,jdbcType=INTEGER},
+      yu_login = #{record.yuLogin,jdbcType=VARCHAR},
+      yu_node_id = #{record.yuNodeId,jdbcType=VARCHAR},
+      yu_avatar_url = #{record.yuAvatarUrl,jdbcType=VARCHAR},
+      yu_html_url = #{record.yuHtmlUrl,jdbcType=VARCHAR},
+      yu_name = #{record.yuName,jdbcType=VARCHAR},
+      yu_bio = #{record.yuBio,jdbcType=VARCHAR},
+      yu_password = #{record.yuPassword,jdbcType=VARCHAR},
+      yu_github_id = #{record.yuGithubId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="team.a9043.yiluwiki.entity.YwUser">
+    update yw_user
+    <set>
+      <if test="yuLogin != null">
+        yu_login = #{yuLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="yuNodeId != null">
+        yu_node_id = #{yuNodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="yuAvatarUrl != null">
+        yu_avatar_url = #{yuAvatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="yuHtmlUrl != null">
+        yu_html_url = #{yuHtmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="yuName != null">
+        yu_name = #{yuName,jdbcType=VARCHAR},
+      </if>
+      <if test="yuBio != null">
+        yu_bio = #{yuBio,jdbcType=VARCHAR},
+      </if>
+      <if test="yuPassword != null">
+        yu_password = #{yuPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="yuGithubId != null">
+        yu_github_id = #{yuGithubId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where yu_id = #{yuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.a9043.yiluwiki.entity.YwUser">
+    update yw_user
+    set yu_login = #{yuLogin,jdbcType=VARCHAR},
+      yu_node_id = #{yuNodeId,jdbcType=VARCHAR},
+      yu_avatar_url = #{yuAvatarUrl,jdbcType=VARCHAR},
+      yu_html_url = #{yuHtmlUrl,jdbcType=VARCHAR},
+      yu_name = #{yuName,jdbcType=VARCHAR},
+      yu_bio = #{yuBio,jdbcType=VARCHAR},
+      yu_password = #{yuPassword,jdbcType=VARCHAR},
+      yu_github_id = #{yuGithubId,jdbcType=INTEGER}
+    where yu_id = #{yuId,jdbcType=INTEGER}
+  </update>
+</mapper>

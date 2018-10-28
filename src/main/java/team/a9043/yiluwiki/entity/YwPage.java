@@ -4,10 +4,7 @@ import org.hibernate.validator.constraints.Length;
 import team.a9043.yiluwiki.controller.valid_group.InsertYwPage;
 import team.a9043.yiluwiki.controller.valid_group.ModifyYwPage;
 
-import javax.validation.constraints.Null;
-
 public class YwPage {
-    @Null(groups = {InsertYwPage.class, ModifyYwPage.class})
     private Integer ypId;
 
     @Length(groups = {InsertYwPage.class, ModifyYwPage.class}, min = 3, max = 30)
