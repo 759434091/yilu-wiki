@@ -85,12 +85,15 @@ public class UserService {
                 .orElseGet(() -> {
                     YwUser ywUser = new YwUser();
                     ywUser.setYuLogin(userJSON.getString("login"));
-                    ywUser.setYuGithubId(userJSON.getInt("id"));
-                    ywUser.setYuNodeId(userJSON.getString("node_id"));
-                    ywUser.setYuName(userJSON.getString("name"));
-                    ywUser.setYuAvatarUrl(userJSON.getString("avatar_url"));
-                    ywUser.setYuHtmlUrl(userJSON.getString("html_url"));
-                    ywUser.setYuBio(userJSON.getString("bio"));
+                    ywUser.setYuGithubId(userJSON.optInt("id"));
+                    ywUser.setYuNodeId(userJSON.optString("node_id"));
+                    ywUser.setYuName(Optional
+                            .of(userJSON.optString("name"))
+                            .filter(n -> !n.isEmpty())
+                            .orElse(userJSON.getString("login")));
+                    ywUser.setYuAvatarUrl(userJSON.optString("avatar_url"));
+                    ywUser.setYuHtmlUrl(userJSON.optString("html_url"));
+                    ywUser.setYuBio(userJSON.optString("bio"));
                     ywUserMapper.insert(ywUser);
 
                     HashMap<String, Object> claimMap = new HashMap<>();
