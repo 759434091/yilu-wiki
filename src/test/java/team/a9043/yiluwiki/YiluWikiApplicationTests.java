@@ -14,7 +14,7 @@ public class YiluWikiApplicationTests {
 
     @Test
     public void contextLoads() {
-        log.info("data:image/png;base64," + Base64Utils.ImageToBase64ByLocal("/media/a9043/Data/yilu_wiki/first_ssm/1.png"));
+        log.info("data:image/png;base64," + Base64Utils.ImageToBase64ByLocal("/media/a9043/Data/yilu_wiki/intro/zhinengzhukun.png"));
     }
 
 }
