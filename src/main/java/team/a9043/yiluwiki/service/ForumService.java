@@ -35,7 +35,7 @@ public class ForumService {
                 .stream()
                 .map(YwForumPost::getYuId)
                 .collect(Collectors.toList());
-        if (!yuIdList.isEmpty())
+        if (yuIdList.isEmpty())
             return ywForumPostList;
 
         YwUserExample ywUserExample = new YwUserExample();
@@ -105,14 +105,14 @@ public class ForumService {
         YwForumReplyExample ywForumReplyExample = new YwForumReplyExample();
         ywForumReplyExample.createCriteria().andYfpIdEqualTo(yfpId);
         ywForumReplyExample.setOrderByClause("yfr_create_time asc");
-        PageHelper.startPage(page, pageSize);
 
+        PageHelper.startPage(page, pageSize);
         List<YwForumReply> ywForumReplyList = ywForumReplyMapper.selectByExample(ywForumReplyExample);
         List<Integer> yuIdList = ywForumReplyList
                 .stream()
                 .map(YwForumReply::getYuId)
                 .collect(Collectors.toList());
-        if (!yuIdList.isEmpty())
+        if (yuIdList.isEmpty())
             return ywForumReplyList;
 
         YwUserExample ywUserExample = new YwUserExample();
