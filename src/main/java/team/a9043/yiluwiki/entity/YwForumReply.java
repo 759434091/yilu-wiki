@@ -1,5 +1,6 @@
 package team.a9043.yiluwiki.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
@@ -86,5 +87,17 @@ public class YwForumReply {
 
     public void setYfrUpdateTime(LocalDateTime yfrUpdateTime) {
         this.yfrUpdateTime = yfrUpdateTime;
+    }
+
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private YwUser ywUser;
+
+    public YwUser getYwUser() {
+        return ywUser;
+    }
+
+    public void setYwUser(YwUser ywUser) {
+        this.ywUser = ywUser;
     }
 }

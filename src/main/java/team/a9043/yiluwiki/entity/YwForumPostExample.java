@@ -165,6 +165,76 @@ public class YwForumPostExample {
             return (Criteria) this;
         }
 
+        public Criteria andYfpAbstractIsNull() {
+            addCriterion("yfp_abstract is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractIsNotNull() {
+            addCriterion("yfp_abstract is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractEqualTo(String value) {
+            addCriterion("yfp_abstract =", value, "yfpAbstract");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractNotEqualTo(String value) {
+            addCriterion("yfp_abstract <>", value, "yfpAbstract");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractGreaterThan(String value) {
+            addCriterion("yfp_abstract >", value, "yfpAbstract");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractGreaterThanOrEqualTo(String value) {
+            addCriterion("yfp_abstract >=", value, "yfpAbstract");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractLessThan(String value) {
+            addCriterion("yfp_abstract <", value, "yfpAbstract");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractLessThanOrEqualTo(String value) {
+            addCriterion("yfp_abstract <=", value, "yfpAbstract");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractLike(String value) {
+            addCriterion("yfp_abstract like", value, "yfpAbstract");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractNotLike(String value) {
+            addCriterion("yfp_abstract not like", value, "yfpAbstract");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractIn(List<String> values) {
+            addCriterion("yfp_abstract in", values, "yfpAbstract");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractNotIn(List<String> values) {
+            addCriterion("yfp_abstract not in", values, "yfpAbstract");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractBetween(String value1, String value2) {
+            addCriterion("yfp_abstract between", value1, value2, "yfpAbstract");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfpAbstractNotBetween(String value1, String value2) {
+            addCriterion("yfp_abstract not between", value1, value2, "yfpAbstract");
+            return (Criteria) this;
+        }
+
         public Criteria andYfpTitleIsNull() {
             addCriterion("yfp_title is null");
             return (Criteria) this;

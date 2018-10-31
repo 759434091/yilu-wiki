@@ -1,5 +1,6 @@
 package team.a9043.yiluwiki.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
@@ -16,6 +17,10 @@ public class YwForumPost {
     @Length(min = 5, max = 60, groups = {InsertYwForumPost.class, ModifyYwForumPost.class})
     @ApiModelProperty("notnull & length[5, 60]")
     private String yfpTitle;
+
+    @Length(min = 5, max = 50, groups = {InsertYwForumPost.class, ModifyYwForumPost.class})
+    @ApiModelProperty("帖子摘要")
+    private String yfpAbstract;
 
     @ApiModelProperty("插入修改时为空")
     private LocalDateTime yfpCreateTime;
@@ -36,6 +41,14 @@ public class YwForumPost {
 
     public void setYfpId(Integer yfpId) {
         this.yfpId = yfpId;
+    }
+
+    public String getYfpAbstract() {
+        return yfpAbstract;
+    }
+
+    public void setYfpAbstract(String yfpAbstract) {
+        this.yfpAbstract = yfpAbstract == null ? null : yfpAbstract.trim();
     }
 
     public String getYfpTitle() {
@@ -76,5 +89,16 @@ public class YwForumPost {
 
     public void setYfpContent(String yfpContent) {
         this.yfpContent = yfpContent == null ? null : yfpContent.trim();
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private YwUser ywUser;
+
+    public YwUser getYwUser() {
+        return ywUser;
+    }
+
+    public void setYwUser(YwUser ywUser) {
+        this.ywUser = ywUser;
     }
 }
