@@ -165,6 +165,66 @@ public class YwForumReplyExample {
             return (Criteria) this;
         }
 
+        public Criteria andYfrFloorIsNull() {
+            addCriterion("yfr_floor is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfrFloorIsNotNull() {
+            addCriterion("yfr_floor is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfrFloorEqualTo(Integer value) {
+            addCriterion("yfr_floor =", value, "yfrFloor");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfrFloorNotEqualTo(Integer value) {
+            addCriterion("yfr_floor <>", value, "yfrFloor");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfrFloorGreaterThan(Integer value) {
+            addCriterion("yfr_floor >", value, "yfrFloor");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfrFloorGreaterThanOrEqualTo(Integer value) {
+            addCriterion("yfr_floor >=", value, "yfrFloor");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfrFloorLessThan(Integer value) {
+            addCriterion("yfr_floor <", value, "yfrFloor");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfrFloorLessThanOrEqualTo(Integer value) {
+            addCriterion("yfr_floor <=", value, "yfrFloor");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfrFloorIn(List<Integer> values) {
+            addCriterion("yfr_floor in", values, "yfrFloor");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfrFloorNotIn(List<Integer> values) {
+            addCriterion("yfr_floor not in", values, "yfrFloor");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfrFloorBetween(Integer value1, Integer value2) {
+            addCriterion("yfr_floor between", value1, value2, "yfrFloor");
+            return (Criteria) this;
+        }
+
+        public Criteria andYfrFloorNotBetween(Integer value1, Integer value2) {
+            addCriterion("yfr_floor not between", value1, value2, "yfrFloor");
+            return (Criteria) this;
+        }
+
         public Criteria andYfrContentIsNull() {
             addCriterion("yfr_content is null");
             return (Criteria) this;

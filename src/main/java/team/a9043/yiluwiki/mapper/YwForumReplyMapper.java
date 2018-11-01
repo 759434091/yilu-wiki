@@ -27,4 +27,6 @@ public interface YwForumReplyMapper {
     int updateByPrimaryKeySelective(YwForumReply record);
 
     int updateByPrimaryKey(YwForumReply record);
+
+    Integer selectMaxFloor(@Param("yfpId") Integer yfpId);
 }

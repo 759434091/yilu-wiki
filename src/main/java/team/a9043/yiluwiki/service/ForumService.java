@@ -15,6 +15,7 @@ import team.a9043.yiluwiki.service_pojo.VoidSuccessOperationResponse;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -148,6 +149,10 @@ public class ForumService {
         ywForumReply.setYfrUpdateTime(localDateTime);
         ywForumReply.setYfpId(yfpId);
         ywForumReply.setYuId(ywUser.getYuId());
+        ywForumReply.setYfrFloor(Optional
+                .ofNullable(ywForumReplyMapper.selectMaxFloor(yfpId))
+                .map(i -> i + 1)
+                .orElse(2));
 
         ywForumReplyMapper.insert(ywForumReply);
         return ywForumReply;

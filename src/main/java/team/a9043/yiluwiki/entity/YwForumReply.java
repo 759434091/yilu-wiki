@@ -14,6 +14,9 @@ public class YwForumReply {
     @ApiModelProperty("插入修改时为空")
     private Integer yfrId;
 
+    @ApiModelProperty("插入修改时为空")
+    private Integer yfrFloor;
+
     @Length(min = 5, max = 1000, groups = {InsertYwForumReply.class, ModifyYwForumReply.class})
     @ApiModelProperty("notnull & length[5, 1000]")
     private String yfrContent;
@@ -39,6 +42,14 @@ public class YwForumReply {
 
     public void setYfrId(Integer yfrId) {
         this.yfrId = yfrId;
+    }
+
+    public Integer getYfrFloor() {
+        return yfrFloor;
+    }
+
+    public void setYfrFloor(Integer yfrFloor) {
+        this.yfrFloor = yfrFloor;
     }
 
     public String getYfrContent() {
