@@ -1,5 +1,6 @@
 package team.a9043.yiluwiki.controller;
 
+import com.github.pagehelper.PageInfo;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,6 @@ import team.a9043.yiluwiki.service.ForumService;
 import team.a9043.yiluwiki.service_pojo.VoidOperationResponse;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @RestController
 public class ForumController {
@@ -26,8 +26,8 @@ public class ForumController {
     private ForumService forumService;
 
     @GetMapping("/posts")
-    public List<YwForumPost> getPosts(@RequestParam Integer page,
-                                      @RequestParam Integer pageSize) throws InvalidParameterException {
+    public PageInfo<YwForumPost> getPosts(@RequestParam Integer page,
+                                          @RequestParam Integer pageSize) throws InvalidParameterException {
         if (page < 1)
             throw new InvalidParameterException("page must bigger than 0");
         if (pageSize < 1 || pageSize > 500)
@@ -65,9 +65,9 @@ public class ForumController {
     }
 
     @GetMapping("/posts/{yfpId}/replies")
-    public List<YwForumReply> getReplies(@PathVariable Integer yfpId,
-                                         @RequestParam Integer page,
-                                         @RequestParam Integer pageSize) throws InvalidParameterException {
+    public PageInfo<YwForumReply> getReplies(@PathVariable Integer yfpId,
+                                             @RequestParam Integer page,
+                                             @RequestParam Integer pageSize) throws InvalidParameterException {
         if (page < 1)
             throw new InvalidParameterException("page must bigger than 0");
         if (pageSize < 1 || pageSize > 500)

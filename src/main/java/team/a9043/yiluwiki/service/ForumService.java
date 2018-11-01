@@ -1,6 +1,7 @@
 package team.a9043.yiluwiki.service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import team.a9043.yiluwiki.entity.*;
 import team.a9043.yiluwiki.exception.InvalidParameterException;
@@ -25,18 +26,19 @@ public class ForumService {
     @Resource
     private YwUserMapper ywUserMapper;
 
-    public List<YwForumPost> getPosts(Integer page, Integer pageSize) {
+    public PageInfo<YwForumPost> getPosts(Integer page, Integer pageSize) {
         YwForumPostExample ywForumPostExample = new YwForumPostExample();
         ywForumPostExample.setOrderByClause("yfp_update_time desc");
         PageHelper.startPage(page, pageSize);
         List<YwForumPost> ywForumPostList = ywForumPostMapper.selectByExample(ywForumPostExample);
+        PageInfo<YwForumPost> pageInfo = new PageInfo<>(ywForumPostList);
 
         List<Integer> yuIdList = ywForumPostList
                 .stream()
                 .map(YwForumPost::getYuId)
                 .collect(Collectors.toList());
         if (yuIdList.isEmpty())
-            return ywForumPostList;
+            return pageInfo;
 
         YwUserExample ywUserExample = new YwUserExample();
         ywUserExample.createCriteria().andYuIdIn(yuIdList);
@@ -47,7 +49,8 @@ public class ForumService {
                 .peek(u -> u.setYuPassword(null))
                 .findAny()
                 .orElse(null)));
-        return ywForumPostList;
+
+        return pageInfo;
     }
 
     public YwForumPost getPost(Integer yfpId) throws InvalidParameterException {
@@ -98,7 +101,7 @@ public class ForumService {
         return stdForumPost;
     }
 
-    public List<YwForumReply> getReplies(Integer yfpId, Integer page, Integer pageSize) throws InvalidParameterException {
+    public PageInfo<YwForumReply> getReplies(Integer yfpId, Integer page, Integer pageSize) throws InvalidParameterException {
         YwForumPost ywForumPost = ywForumPostMapper.selectByPrimaryKey(yfpId);
         if (null == ywForumPost)
             throw new InvalidParameterException("Invalid ForumPost " + yfpId);
@@ -109,12 +112,14 @@ public class ForumService {
 
         PageHelper.startPage(page, pageSize);
         List<YwForumReply> ywForumReplyList = ywForumReplyMapper.selectByExample(ywForumReplyExample);
+        PageInfo<YwForumReply> pageInfo = new PageInfo<>(ywForumReplyList);
+
         List<Integer> yuIdList = ywForumReplyList
                 .stream()
                 .map(YwForumReply::getYuId)
                 .collect(Collectors.toList());
         if (yuIdList.isEmpty())
-            return ywForumReplyList;
+            return pageInfo;
 
         YwUserExample ywUserExample = new YwUserExample();
         ywUserExample.createCriteria().andYuIdIn(yuIdList);
@@ -125,7 +130,7 @@ public class ForumService {
                 .peek(u -> u.setYuPassword(null))
                 .findAny()
                 .orElse(null)));
-        return ywForumReplyList;
+        return pageInfo;
     }
 
     public YwForumReply insertReply(YwUser ywUser, Integer yfpId, YwForumReply ywForumReply) throws InvalidParameterException {
