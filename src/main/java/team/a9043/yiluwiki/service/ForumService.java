@@ -90,6 +90,7 @@ public class ForumService {
             throw new InvalidPermissionException("Invalid permission in ForumPost " + yfpId);
         LocalDateTime localDateTime = LocalDateTime.now();
         stdForumPost.setYfpContent(ywForumPost.getYfpContent());
+        stdForumPost.setYfpAbstract(ywForumPost.getYfpAbstract());
         stdForumPost.setYfpTitle(ywForumPost.getYfpTitle());
         stdForumPost.setYfpUpdateTime(localDateTime);
 
